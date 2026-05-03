@@ -2,130 +2,158 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   AJAI C — NEO-EDITORIAL PORTFOLIO
+   Bold brutalist + electric accents
+   ============================================ */
+
 @layer base {
   :root {
-    --background: 36 50% 97%;
-    --foreground: 230 35% 12%;
+    --background: 48 33% 94%;          /* warm off-white */
+    --foreground: 0 0% 6%;
 
     --card: 0 0% 100%;
-    --card-foreground: 230 35% 12%;
+    --card-foreground: 0 0% 6%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 230 35% 12%;
+    --popover-foreground: 0 0% 6%;
 
-    --primary: 250 75% 60%;
-    --primary-foreground: 36 50% 97%;
-    --primary-glow: 280 80% 70%;
+    --primary: 0 0% 6%;                /* ink black */
+    --primary-foreground: 48 33% 94%;
 
-    --secondary: 20 95% 70%;
-    --secondary-foreground: 230 35% 12%;
+    --secondary: 75 95% 55%;           /* electric lime */
+    --secondary-foreground: 0 0% 6%;
 
-    --muted: 36 30% 92%;
-    --muted-foreground: 230 15% 45%;
+    --muted: 48 20% 88%;
+    --muted-foreground: 0 0% 35%;
 
-    --accent: 165 70% 55%;
-    --accent-foreground: 230 35% 12%;
+    --accent: 14 95% 58%;              /* tangerine */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 230 20% 88%;
-    --input: 230 20% 88%;
-    --ring: 250 75% 60%;
+    --border: 0 0% 6%;
+    --input: 0 0% 6%;
+    --ring: 14 95% 58%;
 
-    --radius: 1.25rem;
+    --radius: 0.25rem;
 
-    /* Inspirational palette */
-    --ink: 230 40% 10%;
-    --cream: 36 50% 97%;
-    --peach: 20 100% 88%;
-    --lilac: 270 80% 90%;
-    --mint: 160 70% 85%;
-    --sky: 200 90% 85%;
-    --sun: 45 100% 75%;
+    /* Vibrant sticker palette */
+    --lime: 75 95% 55%;
+    --tangerine: 14 95% 58%;
+    --cobalt: 230 95% 60%;
+    --bubblegum: 330 90% 70%;
+    --butter: 48 100% 70%;
+    --mint: 150 65% 65%;
 
-    --gradient-aurora: linear-gradient(135deg, hsl(270 80% 88%) 0%, hsl(20 100% 86%) 50%, hsl(45 100% 80%) 100%);
-    --gradient-sunset: linear-gradient(120deg, hsl(20 95% 68%), hsl(330 85% 70%), hsl(270 80% 70%));
-    --gradient-mint: linear-gradient(135deg, hsl(160 70% 75%), hsl(200 90% 78%));
-    --gradient-text: linear-gradient(120deg, hsl(250 75% 55%) 0%, hsl(330 85% 60%) 50%, hsl(20 95% 60%) 100%);
+    --shadow-brutal: 6px 6px 0 hsl(var(--foreground));
+    --shadow-brutal-lg: 10px 10px 0 hsl(var(--foreground));
+    --shadow-brutal-color: 6px 6px 0 hsl(var(--accent));
 
-    --shadow-soft: 0 20px 60px -20px hsl(250 75% 60% / 0.25);
-    --shadow-glow: 0 0 80px hsl(280 80% 70% / 0.35);
-    --shadow-card: 0 10px 40px -15px hsl(230 40% 30% / 0.15);
-
-    --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   * { @apply border-border; }
+
   html { scroll-behavior: smooth; }
+
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-feature-settings: "ss01", "cv11";
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    background-image:
+      radial-gradient(circle at 1px 1px, hsl(0 0% 6% / 0.08) 1px, transparent 0);
+    background-size: 24px 24px;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
+    font-family: 'Instrument Serif', 'Playfair Display', Georgia, serif;
     letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    background: var(--gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .bg-aurora { background: var(--gradient-aurora); }
-  .bg-sunset { background: var(--gradient-sunset); }
-  .bg-mint-grad { background: var(--gradient-mint); }
-  .shadow-soft { box-shadow: var(--shadow-soft); }
-  .shadow-glow { box-shadow: var(--shadow-glow); }
-  .shadow-card { box-shadow: var(--shadow-card); }
+  .font-display { font-family: 'Instrument Serif', Georgia, serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.55;
-    pointer-events: none;
-    animation: float 14s ease-in-out infinite;
-  }
+  .border-brutal { border: 2px solid hsl(var(--foreground)); }
+  .border-brutal-thick { border: 3px solid hsl(var(--foreground)); }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.9s var(--transition-smooth), transform 0.9s var(--transition-smooth);
+  .shadow-brutal { box-shadow: var(--shadow-brutal); }
+  .shadow-brutal-lg { box-shadow: var(--shadow-brutal-lg); }
+  .shadow-brutal-accent { box-shadow: var(--shadow-brutal-color); }
+
+  .bg-lime { background-color: hsl(var(--lime)); }
+  .bg-tangerine { background-color: hsl(var(--tangerine)); }
+  .bg-cobalt { background-color: hsl(var(--cobalt)); }
+  .bg-bubblegum { background-color: hsl(var(--bubblegum)); }
+  .bg-butter { background-color: hsl(var(--butter)); }
+  .bg-mint { background-color: hsl(var(--mint)); }
+
+  .text-cobalt { color: hsl(var(--cobalt)); }
+  .text-tangerine { color: hsl(var(--tangerine)); }
+
+  .hover-lift {
+    transition: transform 0.25s var(--transition-bounce),
+                box-shadow 0.25s ease;
   }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
+  .hover-lift:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 hsl(var(--foreground));
   }
 
-  .marquee {
-    display: flex;
-    gap: 3rem;
-    animation: marquee 40s linear infinite;
-    width: max-content;
-  }
-}
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
 
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(40px, -30px) scale(1.1); }
-  66% { transform: translate(-30px, 40px) scale(0.95); }
+  .marquee-track { display: flex; gap: 3rem; width: max-content; animation: marquee 30s linear infinite; }
+
+  .sticker { transform: rotate(-3deg); transition: transform 0.4s var(--transition-bounce); }
+  .sticker:hover { transform: rotate(2deg) scale(1.05); }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(0 0% 6% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 6% / 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 2px hsl(var(--foreground));
+    color: transparent;
+  }
+
+  .blink { animation: blink 1.2s steps(2) infinite; }
 }
 
 @keyframes marquee {
   to { transform: translateX(-50%); }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
 }
 
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
+@keyframes blink {
+  50% { opacity: 0; }
 }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  60% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.animate-spin-slow { animation: spin-slow 18s linear infinite; }
+.animate-wiggle { animation: wiggle 3s ease-in-out infinite; }
+.animate-bounce-in { animation: bounce-in 0.7s var(--transition-bounce) both; }
