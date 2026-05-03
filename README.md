@@ -1,3 +1,1 @@
-# Welcome to your Lovable project
-
-TODO: Document your project here
+A high-performance developer portfolio designed to showcase my ability to build scalable, production-ready applications. Features include dynamic UI/UX, advanced animations, and projects covering full-stack development, AI integrations, and real-time systems. Built to demonstrate both technical expertise and problem-solving ability.
