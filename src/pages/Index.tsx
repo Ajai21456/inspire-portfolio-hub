@@ -221,10 +221,10 @@ const Index = () => {
         {/* Stats row */}
         <div className="reveal max-w-7xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 border-2 border-foreground bg-card">
           {[
-            { n: 400, s: "+", l: "Issues Solved" },
-            { n: 3, s: "", l: "Live APIs" },
-            { n: 7, s: "", l: "Certifications" },
-            { n: 4, s: "", l: "Projects Shipped" },
+            { n: 400, s: "+", l: "Orders Cleared" },
+            { n: 3, s: "", l: "Live Market APIs" },
+            { n: 6, s: "", l: "Certifications" },
+            { n: 2, s: "", l: "Projects Shipped" },
           ].map((s, i) => (
             <div key={i} className={`p-6 md:p-8 ${i < 3 ? "border-r-2 border-foreground" : ""} ${i === 1 ? "bg-secondary" : ""} ${i === 2 ? "bg-butter" : ""}`}>
               <div className="font-display text-5xl md:text-6xl">
