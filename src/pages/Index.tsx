@@ -57,7 +57,7 @@ const projects = [
     sub: "Real-time Financial Stock Market Simulation",
     desc: "Real-time stock market simulation app integrating 3 live market APIs (Twelve Data, Alpha Vantage, Yahoo Finance), processing 1,000+ data points daily. Includes a paper trading system with virtual funds, buy/sell order execution, and portfolio performance tracking. Built RESTful APIs with Node.js and Express.js for transactions and stock data processing.",
     stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "React.js", "PostgreSQL", "MongoDB"],
-    link: "https://github.com/Ajai21456/PORTFOLIO-Financial",
+    link: "https://github.com/Ajai21456/PORTFOLIO-Financial-",
     color: "bg-lime",
     big: true,
   },
