@@ -67,7 +67,7 @@ const projects = [
     sub: "Secure Multi-User Platform",
     desc: "Secure multi-user file management system with a Python backend and React.js frontend, supporting 5+ file formats. Implemented JWT-based authentication and role-based access control across 3 permission levels. Designed and tested REST APIs for file upload, sharing, and retrieval using Postman.",
     stack: ["HTML", "CSS", "Tailwind CSS", "JavaScript", "React.js", "PostgreSQL", "Appwrite", "Python"],
-    link: "https://github.com/Ajai21456/file_management",
+    link: "https://github.com/Ajai21456/file_management-",
     color: "bg-cobalt",
     inverse: true,
     big: true,
