@@ -25,6 +25,17 @@ const experience = [
     ],
   },
   {
+    period: "Mar 2025 — Apr 2025",
+    role: "Operations Executive Intern",
+    company: "The Objects",
+    badge: "Intern → FTE",
+    color: "bg-bubblegum",
+    points: [
+      "Supported technical operations & debugging in a fast-paced print production environment.",
+      "Recognized for adaptability and converted to full-time within 2 months.",
+    ],
+  },
+  {
     period: "Jun 2024 — Jul 2024",
     role: "Summer Intern – EDI & API Systems",
     company: "Flextronics Technologies (India) Pvt. Ltd.",
@@ -164,7 +175,6 @@ const Index = () => {
             Available for hire
           </div>
           <div>📍 Chennai, IND · {time} IST</div>
-          <div>v2.0 · Portfolio'26</div>
         </div>
 
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-6 items-start">
@@ -191,6 +201,9 @@ const Index = () => {
               </a>
               <a href="mailto:ajai21456@gmail.com" className="inline-flex items-center gap-2 px-6 py-4 bg-card font-mono text-sm uppercase border-2 border-foreground shadow-brutal hover-lift">
                 Say hello
+              </a>
+              <a href="/Ajai_C_Resume.pdf" download className="inline-flex items-center gap-2 px-6 py-4 bg-tangerine text-background font-mono text-sm uppercase border-2 border-foreground shadow-brutal hover-lift">
+                ↓ Download Resume
               </a>
             </div>
           </div>
