@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Mail, Linkedin, Github, Phone, Star, Sparkles, Zap, Code2, Terminal, Database } from "lucide-react";
 
-const tickerWords = ["BACKEND", "NODE.JS", "PYTHON", "POSTGRESQL", "REST APIs", "MICROSERVICES", "MONGODB", "DOCKER", "JAVA", "JWT AUTH"];
+const tickerWords = ["BACKEND", "NODE.JS", "PYTHON", "POSTGRESQL", "REST APIs", "MICROSERVICES", "MONGODB", "JAVA", "JWT AUTH", "EXPRESS"];
 
 const skills = {
   Languages: ["Python", "JavaScript", "Java", "SQL"],
-  Backend: ["Node.js", "Express.js", "REST APIs", "JWT Auth", "Microservices", "API Design"],
+  Backend: ["Node.js", "Express.js", "REST APIs", "JWT Auth", "Microservices", "REST API Design"],
   Database: ["PostgreSQL", "MongoDB", "SQL"],
-  Tools: ["Git", "GitHub", "Docker", "Postman", "Linux", "VS Code", "CI/CD"],
+  Tools: ["Git", "GitHub", "Postman", "Linux", "VS Code"],
+  Concepts: ["System Design", "Scalable Architecture", "API Security", "Real-time Data"],
 };
 
 const experience = [
@@ -18,32 +19,22 @@ const experience = [
     badge: "Full-Time",
     color: "bg-lime",
     points: [
-      "Diagnosed & resolved 400+ technical issues with structured debugging — zero repeat escalation.",
-      "Operated Future Rip production software for print job scheduling.",
+      "Cleared a 4-day backlog of 400+ pending print production orders in a single day through systematic workflow restructuring.",
       "Awarded 🥈 Silver Coin Recognition for outstanding performance.",
-    ],
-  },
-  {
-    period: "Mar 2025 — Apr 2025",
-    role: "Operations Intern",
-    company: "The Objects",
-    badge: "Intern → FTE",
-    color: "bg-bubblegum",
-    points: [
-      "Supported technical operations & debugging in fast-paced environment.",
-      "Recognized for adaptability — converted to full-time within 2 months.",
+      "Operated and monitored Future Rip production software, resolving workflow interruptions to maintain on-time delivery.",
     ],
   },
   {
     period: "Jun 2024 — Jul 2024",
-    role: "EDI & API Systems Intern",
-    company: "Flextronics Technologies",
+    role: "Summer Intern – EDI & API Systems",
+    company: "Flextronics Technologies (India) Pvt. Ltd.",
     badge: "Fortune 500",
     color: "bg-butter",
     points: [
-      "Built integrations using REST, SOAP, AS2, EDIFACT & XML across global partners.",
-      "Optimized 5+ EDI workflows, cutting onboarding documentation time by 30%.",
-      "Strengthened API design, security and enterprise architecture skills.",
+      "Contributed to enterprise-scale API and EDI integration systems handling B2B and A2A communication across global partners.",
+      "Implemented and analysed integrations using REST, SOAP, AS2, EDIFACT, and XML for secure and standardised data exchange.",
+      "Optimised 5+ EDI integration workflows across global partner systems, reducing onboarding documentation time by 30%.",
+      "Designed and documented integration workflows, improving system transparency for new developers.",
     ],
   },
 ];
@@ -51,42 +42,24 @@ const experience = [
 const projects = [
   {
     n: "01",
-    title: "PortfolioAI Pro",
-    sub: "Real-time Stock Market Simulation",
-    desc: "Full-featured financial platform for Indian NSE/BSE markets — virtual paper trading, 3 live API integrations, financial calculators (SIP, CAGR, XIRR), and AI-driven portfolio analysis.",
-    stack: ["Node.js", "Express", "React", "PostgreSQL", "MongoDB", "Twelve Data", "Alpha Vantage"],
-    link: "https://github.com/Ajai21456/PORTFOLIO-Financial-",
+    title: "Portfolio Management System",
+    sub: "Real-time Financial Stock Market Simulation",
+    desc: "Real-time stock market simulation app integrating 3 live market APIs (Twelve Data, Alpha Vantage, Yahoo Finance), processing 1,000+ data points daily. Includes a paper trading system with virtual funds, buy/sell order execution, and portfolio performance tracking. Built RESTful APIs with Node.js and Express.js for transactions and stock data processing.",
+    stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "React.js", "PostgreSQL", "MongoDB"],
+    link: "https://github.com/Ajai21456/PORTFOLIO-Financial",
     color: "bg-lime",
     big: true,
   },
   {
     n: "02",
-    title: "File Management System",
+    title: "Online File Management System",
     sub: "Secure Multi-User Platform",
-    desc: "Multi-user file management with email login, JWT auth, and role-based access across 3 permission tiers — supporting 5+ file formats.",
-    stack: ["Python", "React", "PostgreSQL", "Appwrite", "JWT"],
-    link: "https://github.com/Ajai21456/file_management-",
+    desc: "Secure multi-user file management system with a Python backend and React.js frontend, supporting 5+ file formats. Implemented JWT-based authentication and role-based access control across 3 permission levels. Designed and tested REST APIs for file upload, sharing, and retrieval using Postman.",
+    stack: ["HTML", "CSS", "Tailwind CSS", "JavaScript", "React.js", "PostgreSQL", "Appwrite", "Python"],
+    link: "https://github.com/Ajai21456/file_management",
     color: "bg-cobalt",
     inverse: true,
-  },
-  {
-    n: "03",
-    title: "Java Enterprise Lab",
-    sub: "RMI · HTTP · JSP",
-    desc: "Enterprise Java experiments — RMI Calculator, cookie HTTP server, KBC quiz, JSP equivalents using com.sun.net.httpserver.",
-    stack: ["Java", "RMI", "JSP", "HTTP Server"],
-    link: "https://github.com/Ajai21456",
-    color: "bg-tangerine",
-    inverse: true,
-  },
-  {
-    n: "04",
-    title: "NSE Performance Tracker",
-    sub: "CAGR · Nifty 50 Benchmark",
-    desc: "Excel/Sheets-based stock tracker comparing NSE stocks against Nifty 50 using CAGR formulas, conditional formatting & live data pulls.",
-    stack: ["Excel", "Google Sheets", "CAGR", "NSE Data"],
-    link: "https://github.com/Ajai21456",
-    color: "bg-bubblegum",
+    big: true,
   },
 ];
 
@@ -97,12 +70,11 @@ const education = [
 
 const certs = [
   { name: "Oracle Certified Foundations Associate", issuer: "Oracle University", date: "Mar 2024" },
-  { name: "MongoDB, Node.js & CRUD Operations", issuer: "MongoDB University", date: "Mar 2024" },
+  { name: "MongoDB, Node.js, CRUD Operations", issuer: "MongoDB University", date: "Mar 2024" },
   { name: "Cloud Computing & Distributed Systems — Elite", issuer: "NPTEL", date: "Jan – Mar 2026" },
-  { name: "AI For Everyone", issuer: "Coursera · DeepLearning.AI", date: "Jul 2025" },
-  { name: "Software Development Job Simulation", issuer: "CITI Program", date: "May 2026" },
+  { name: "AI For Everyone", issuer: "DeepLearning.AI · Coursera", date: "Jul 2025" },
+  { name: "Technology Software Development Job Simulation", issuer: "CITI", date: "May 2026" },
   { name: "Consultant Job Simulation", issuer: "Accenture", date: "May 2025" },
-  { name: "SQL Programming · Python", issuer: "LinkedIn Learning", date: "Jun 2021" },
 ];
 
 function useReveal() {
@@ -249,10 +221,10 @@ const Index = () => {
         {/* Stats row */}
         <div className="reveal max-w-7xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 border-2 border-foreground bg-card">
           {[
-            { n: 400, s: "+", l: "Issues Solved" },
-            { n: 3, s: "", l: "Live APIs" },
-            { n: 7, s: "", l: "Certifications" },
-            { n: 4, s: "", l: "Projects Shipped" },
+            { n: 400, s: "+", l: "Orders Cleared" },
+            { n: 3, s: "", l: "Live Market APIs" },
+            { n: 6, s: "", l: "Certifications" },
+            { n: 2, s: "", l: "Projects Shipped" },
           ].map((s, i) => (
             <div key={i} className={`p-6 md:p-8 ${i < 3 ? "border-r-2 border-foreground" : ""} ${i === 1 ? "bg-secondary" : ""} ${i === 2 ? "bg-butter" : ""}`}>
               <div className="font-display text-5xl md:text-6xl">
