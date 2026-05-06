@@ -108,6 +108,96 @@ function useReveal() {
   }, []);
 }
 
+function ScreenshotCarousel({ images, title, inverse }: { images: { src: string; label: string }[]; title: string; inverse: boolean }) {
+  const [idx, setIdx] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const total = images.length;
+
+  const goTo = (i: number) => {
+    const next = (i + total) % total;
+    setIdx(next);
+    const track = trackRef.current;
+    if (track) {
+      const slide = track.children[next] as HTMLElement | undefined;
+      slide?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+    }
+  };
+
+  const handleScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const slideWidth = track.clientWidth;
+    const current = Math.round(track.scrollLeft / slideWidth);
+    if (current !== idx) setIdx(current);
+  };
+
+  const stop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const borderC = inverse ? "border-background" : "border-foreground";
+  const captionC = inverse
+    ? "border-background bg-background text-foreground"
+    : "border-foreground bg-foreground text-background";
+
+  return (
+    <div className="mt-8" onClick={stop}>
+      <div className={`relative border-2 ${borderC} bg-background overflow-hidden`}>
+        <div
+          ref={trackRef}
+          onScroll={handleScroll}
+          className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {images.map((img) => (
+            <figure key={img.label} className="shrink-0 w-full snap-start">
+              <img
+                src={img.src}
+                alt={`${title} – ${img.label}`}
+                loading="lazy"
+                className="w-full h-56 sm:h-72 md:h-[28rem] object-contain bg-background"
+              />
+              <figcaption className={`px-3 py-2 font-mono text-[10px] sm:text-xs uppercase tracking-wider border-t-2 ${captionC}`}>
+                {String(images.indexOf(img) + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} — {img.label}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          aria-label="Previous screenshot"
+          onClick={(e) => { stop(e); goTo(idx - 1); }}
+          className={`absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 grid place-items-center border-2 ${borderC} bg-background text-foreground hover:bg-tangerine transition-colors`}
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          type="button"
+          aria-label="Next screenshot"
+          onClick={(e) => { stop(e); goTo(idx + 1); }}
+          className={`absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 grid place-items-center border-2 ${borderC} bg-background text-foreground hover:bg-tangerine transition-colors`}
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {images.map((img, i) => (
+          <button
+            key={img.label}
+            type="button"
+            aria-label={`Go to ${img.label}`}
+            onClick={(e) => { stop(e); goTo(i); }}
+            className={`h-2 transition-all border-2 ${borderC} ${i === idx ? "w-8 bg-tangerine" : "w-4 bg-background"}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   const [n, setN] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
