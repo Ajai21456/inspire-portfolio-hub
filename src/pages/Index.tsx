@@ -14,25 +14,14 @@ const skills = {
 const experience = [
   {
     period: "May 2025 — Apr 2026",
-    role: "Operations Executive",
+    role: "Operations Executive (Technical Internship)",
     company: "The Objects",
-    badge: "Full-Time",
+    badge: "Internship",
     color: "bg-lime",
     points: [
       "Cleared a 4-day backlog of 400+ pending print production orders in a single day through systematic workflow restructuring.",
       "Awarded 🥈 Silver Coin Recognition for outstanding performance.",
       "Operated and monitored Future Rip production software, resolving workflow interruptions to maintain on-time delivery.",
-    ],
-  },
-  {
-    period: "Mar 2025 — Apr 2025",
-    role: "Operations Executive Intern",
-    company: "The Objects",
-    badge: "Intern → FTE",
-    color: "bg-bubblegum",
-    points: [
-      "Supported technical operations & debugging in a fast-paced print production environment.",
-      "Recognized for adaptability and converted to full-time within 2 months.",
     ],
   },
   {
