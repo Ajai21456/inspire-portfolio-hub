@@ -1,5 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Mail, Linkedin, Github, Phone, Star, Sparkles, Zap, Code2, Terminal, Database } from "lucide-react";
+import fmsSignup from "@/assets/fms-signup.png";
+import fmsSignin from "@/assets/fms-signin.png";
+import fmsOtp from "@/assets/fms-otp.png";
+import fmsDashboard from "@/assets/fms-dashboard.png";
+import fmsDocuments from "@/assets/fms-documents.png";
+import fmsImages from "@/assets/fms-images.png";
+import fmsMedia from "@/assets/fms-media.png";
+import fmsOthers from "@/assets/fms-others.png";
+import fmsSearch from "@/assets/fms-search.png";
 
 const tickerWords = ["BACKEND", "NODE.JS", "PYTHON", "POSTGRESQL", "REST APIs", "MICROSERVICES", "MONGODB", "JAVA", "JWT AUTH", "EXPRESS"];
 
@@ -60,6 +69,17 @@ const projects = [
     color: "bg-cobalt",
     inverse: true,
     big: true,
+    images: [
+      { src: fmsSignup, label: "Sign Up" },
+      { src: fmsSignin, label: "Sign In" },
+      { src: fmsOtp, label: "OTP Verification" },
+      { src: fmsDashboard, label: "Dashboard" },
+      { src: fmsDocuments, label: "Documents" },
+      { src: fmsImages, label: "Images" },
+      { src: fmsMedia, label: "Media" },
+      { src: fmsOthers, label: "Others / Upload" },
+      { src: fmsSearch, label: "Search" },
+    ],
   },
 ];
 
