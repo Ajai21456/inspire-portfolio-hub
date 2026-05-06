@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Mail, Linkedin, Github, Phone, Star, Sparkles, Zap, Code2, Terminal, Database, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Mail, Linkedin, Github, Phone, Star, Sparkles, Zap, Code2, Terminal, Database } from "lucide-react";
 import fmsSignup from "@/assets/fms-signup.png";
 import fmsSignin from "@/assets/fms-signin.png";
 import fmsOtp from "@/assets/fms-otp.png";
@@ -106,162 +106,6 @@ function useReveal() {
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
-}
-
-function ScreenshotCarousel({ images, title, inverse }: { images: { src: string; label: string }[]; title: string; inverse: boolean }) {
-  const [idx, setIdx] = useState(0);
-  const [width, setWidth] = useState(0);
-  const [drag, setDrag] = useState(0);
-  const [dragging, setDragging] = useState(0); // 0=no, 1=yes
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const startXRef = useRef(0);
-  const total = images.length;
-
-  const clamp = (i: number) => ((i % total) + total) % total;
-  const goTo = (i: number) => setIdx(clamp(i));
-
-  // Recalibrate on resize / container size change
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const measure = () => setWidth(el.clientWidth);
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    window.addEventListener("orientationchange", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("orientationchange", measure);
-    };
-  }, []);
-
-  // Keyboard nav when carousel is focused / hovered
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (!el.matches(":hover") && document.activeElement !== el) return;
-      if (e.key === "ArrowRight") { e.preventDefault(); goTo(idx + 1); }
-      if (e.key === "ArrowLeft")  { e.preventDefault(); goTo(idx - 1); }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [idx, total]);
-
-  // Pointer drag / swipe
-  const onPointerDown = (e: React.PointerEvent) => {
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    startXRef.current = e.clientX;
-    setDragging(1);
-    setDrag(0);
-  };
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!dragging) return;
-    setDrag(e.clientX - startXRef.current);
-  };
-  const onPointerUp = () => {
-    if (!dragging) return;
-    const threshold = Math.max(40, width * 0.15);
-    if (drag > threshold) goTo(idx - 1);
-    else if (drag < -threshold) goTo(idx + 1);
-    setDrag(0);
-    setDragging(0);
-  };
-
-  const stop = (e: React.MouseEvent | React.PointerEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const borderC = inverse ? "border-background" : "border-foreground";
-  const captionC = inverse
-    ? "border-background bg-background text-foreground"
-    : "border-foreground bg-foreground text-background";
-
-  const offset = -idx * width + (dragging ? drag : 0);
-
-  return (
-    <div className="mt-8 select-none" onClick={stop}>
-      <div
-        ref={viewportRef}
-        tabIndex={0}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label={`${title} screenshots`}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
-        className={`relative border-2 ${borderC} bg-background overflow-hidden touch-pan-y outline-none focus-visible:ring-2 focus-visible:ring-tangerine`}
-        style={{ cursor: dragging ? "grabbing" : "grab" }}
-      >
-        <div
-          className="flex will-change-transform"
-          style={{
-            width: width ? width * total : undefined,
-            transform: `translate3d(${offset}px, 0, 0)`,
-            transition: dragging ? "none" : "transform 500ms cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
-        >
-          {images.map((img, i) => (
-            <figure key={img.label} className="shrink-0" style={{ width: width || "100%" }} aria-hidden={i !== idx}>
-              <img
-                src={img.src}
-                alt={`${title} – ${img.label}`}
-                loading={i === 0 ? "eager" : "lazy"}
-                draggable={false}
-                className="w-full h-56 sm:h-72 md:h-[28rem] object-contain bg-background pointer-events-none"
-              />
-              <figcaption className={`px-3 py-2 font-mono text-[10px] sm:text-xs uppercase tracking-wider border-t-2 ${captionC}`}>
-                {String(i + 1).padStart(2, "0")} / {String(total).padStart(2, "0")} — {img.label}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          aria-label="Previous screenshot"
-          onPointerDown={stop}
-          onClick={(e) => { stop(e); goTo(idx - 1); }}
-          className={`absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 grid place-items-center border-2 ${borderC} bg-background text-foreground hover:bg-tangerine hover:scale-110 active:scale-95 transition-all`}
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next screenshot"
-          onPointerDown={stop}
-          onClick={(e) => { stop(e); goTo(idx + 1); }}
-          className={`absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 md:w-11 md:h-11 grid place-items-center border-2 ${borderC} bg-background text-foreground hover:bg-tangerine hover:scale-110 active:scale-95 transition-all`}
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
-
-        {/* progress bar */}
-        <div className={`absolute left-0 right-0 bottom-0 h-1 ${inverse ? "bg-background/20" : "bg-foreground/10"}`}>
-          <div
-            className="h-full bg-tangerine transition-all duration-500 ease-out"
-            style={{ width: `${((idx + 1) / total) * 100}%` }}
-          />
-        </div>
-      </div>
-
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        {images.map((img, i) => (
-          <button
-            key={img.label}
-            type="button"
-            aria-label={`Go to ${img.label}`}
-            aria-current={i === idx}
-            onPointerDown={stop}
-            onClick={(e) => { stop(e); goTo(i); }}
-            className={`h-2 transition-all duration-300 border-2 ${borderC} ${i === idx ? "w-10 bg-tangerine" : "w-4 bg-background hover:w-6"}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
 }
 
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
@@ -555,7 +399,14 @@ const Index = () => {
                   ))}
                 </div>
                 {p.images && (
-                  <ScreenshotCarousel images={p.images} title={p.title} inverse={!!p.inverse} />
+                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {p.images.map((img) => (
+                      <figure key={img.label} className={`group/img border-2 ${p.inverse ? "border-background" : "border-foreground"} bg-background overflow-hidden`}>
+                        <img src={img.src} alt={`${p.title} – ${img.label}`} loading="lazy" className="w-full h-40 md:h-48 object-cover object-top transition-transform duration-500 group-hover/img:scale-105" />
+                        <figcaption className={`px-3 py-2 font-mono text-[10px] uppercase tracking-wider border-t-2 ${p.inverse ? "border-background bg-background text-foreground" : "border-foreground bg-foreground text-background"}`}>{img.label}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
                 )}
               </a>
             ))}
