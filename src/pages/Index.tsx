@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Mail, Linkedin, Github, Phone, Star, Sparkles, Zap, Code2, Terminal, Database } from "lucide-react";
+import { ArrowUpRight, Mail, Linkedin, Github, Phone, Star, Sparkles, Zap, Code2, Terminal, Database, ChevronLeft, ChevronRight } from "lucide-react";
 import fmsSignup from "@/assets/fms-signup.png";
 import fmsSignin from "@/assets/fms-signin.png";
 import fmsOtp from "@/assets/fms-otp.png";
