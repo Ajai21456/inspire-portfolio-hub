@@ -398,6 +398,16 @@ const Index = () => {
                     <span key={s} className={`px-3 py-1 border ${p.inverse ? "border-background" : "border-foreground"} font-mono text-xs`}>{s}</span>
                   ))}
                 </div>
+                {p.images && (
+                  <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {p.images.map((img) => (
+                      <figure key={img.label} className={`group/img border-2 ${p.inverse ? "border-background" : "border-foreground"} bg-background overflow-hidden`}>
+                        <img src={img.src} alt={`${p.title} – ${img.label}`} loading="lazy" className="w-full h-40 md:h-48 object-cover object-top transition-transform duration-500 group-hover/img:scale-105" />
+                        <figcaption className={`px-3 py-2 font-mono text-[10px] uppercase tracking-wider border-t-2 ${p.inverse ? "border-background bg-background text-foreground" : "border-foreground bg-foreground text-background"}`}>{img.label}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
               </a>
             ))}
           </div>
